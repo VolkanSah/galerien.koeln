@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>galerien.koeln – Bewerbung neu gedacht</title>
+    <style>
+        /* Variablen für konsistente Farben */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            --card-dark: rgba(30, 41, 59, 0.8);
+            --text-light: #e2e8f0;
+            --text-accent: #8be9fd;
+            --border-glow: rgba(139, 233, 253, 0.3);
+        }
+
+        /* Animationen */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(139, 233, 253, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(139, 233, 253, 0.6), 0 0 60px rgba(139, 233, 253, 0.3); }
+        }
+
+        @keyframes slide-in-left {
+            0% { transform: translateX(-100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slide-in-right {
+            0% { transform: translateX(100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes text-rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes border-dance {
+            0% { border-image-source: linear-gradient(45deg, #8be9fd, #50fa7b, #ff79c6, #8be9fd); }
+            25% { border-image-source: linear-gradient(45deg, #50fa7b, #ff79c6, #8be9fd, #50fa7b); }
+            50% { border-image-source: linear-gradient(45deg, #ff79c6, #8be9fd, #50fa7b, #ff79c6); }
+            75% { border-image-source: linear-gradient(45deg, #8be9fd, #50fa7b, #ff79c6, #8be9fd); }
+            100% { border-image-source: linear-gradient(45deg, #50fa7b, #ff79c6, #8be9fd, #50fa7b); }
+        }
+
+        /* Grundlayout */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--dark-gradient);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-light);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animierter Hintergrund */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(139, 233, 253, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 121, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(80, 250, 123, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        header {
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.9) 0%, rgba(75, 85, 99, 0.9) 100%);
+            text-align: center;
+            padding: 4em 1em;
+            position: relative;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(139, 233, 253, 0.2);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(139, 233, 253, 0.05) 50%, transparent 70%);
+            animation: slide-in-right 2s ease-out;
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            margin: 0;
+            letter-spacing: 3px;
+            background: linear-gradient(270deg, #8be9fd, #50fa7b, #ff79c6, #bd93f9);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: text-rainbow 4s ease infinite, float 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 0 30px rgba(139, 233, 253, 0.5);
+        }
+
+        header p {
+            margin-top: 1em;
+            font-size: 1.3em;
+            color: #cbd5e1;
+            animation: slide-in-left 1.5s ease-out 0.5s both;
+            position: relative;
+            z-index: 2;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4em 0;
+        }
+
+        section {
+            margin-bottom: 5em;
+            animation: slide-in-left 1s ease-out;
+        }
+
+        section:nth-child(even) {
+            animation: slide-in-right 1s ease-out;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            margin-bottom: 1em;
+            position: relative;
+            padding-left: 1em;
+            color: var(--text-light);
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: linear-gradient(180deg, #8be9fd, #50fa7b, #ff79c6);
+            border-radius: 3px;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid #8be9fd;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            opacity: 0.7;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #cbd5e1;
+            line-height: 1.9;
+            margin-bottom: 1.5em;
+        }
+
+        .card {
+            background: var(--card-dark);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 2.5em;
+            margin-top: 1.5em;
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #8be9fd, #50fa7b, #ff79c6, #bd93f9);
+            z-index: -1;
+            border-radius: 20px;
+            padding: 2px;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(139, 233, 253, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(139, 233, 253, 0.2);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+            animation: border-dance 3s linear infinite;
+        }
+
+        .card:hover::after {
+            opacity: 1;
+            top: -100%;
+            left: -100%;
+        }
+
+        .card p {
+            position: relative;
+            z-index: 2;
+        }
+
+        footer {
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.95) 0%, rgba(75, 85, 99, 0.95) 100%);
+            text-align: center;
+            padding: 3em;
+            color: #94a3b8;
+            font-size: 1em;
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(139, 233, 253, 0.2);
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #8be9fd, transparent);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        a {
+            color: var(--text-accent);
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        a::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #8be9fd, #50fa7b);
+            transition: width 0.3s ease;
+        }
+
+        a:hover {
+            color: #50fa7b;
+            text-shadow: 0 0 10px rgba(80, 250, 123, 0.5);
+        }
+
+        a:hover::before {
+            width: 100%;
+        }
+
+        /* Spezielle Effekte für verschiedene Karten */
+        .card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+                letter-spacing: 2px;
+            }
+
+            header p {
+                font-size: 1.1em;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            .card {
+                padding: 2em;
+            }
+
+            p {
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 3em 1em;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            .container {
+                width: 95%;
+                padding: 2em 0;
+            }
+
+            .card {
+                padding: 1.5em;
+            }
+        }
+
+        /* Zusätzliche Micro-Animationen */
+        strong {
+            color: #50fa7b;
+            text-shadow: 0 0 5px rgba(80, 250, 123, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        strong:hover {
+            text-shadow: 0 0 15px rgba(80, 250, 123, 0.8);
+        }
+
+        /* Scroll-Indikator */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #8be9fd, #50fa7b, #ff79c6);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>galerien.koeln</h1>
+        <p>Kreativität, neu gedacht – Bewerbungsseite 2.0</p>
+    </header>
+
+    <main class="container">
+<section>
+    <h2>Wer ich bin</h2>
+    <div class="card">
+        <p>Diese LandingPage – oder Squeeze Page, wenn’s technischer klingen soll – stammt nicht aus einer hippen Agentur, sondern direkt von mir, Volkan Kücükbudak. Ziel: Zu zeigen, dass man keine aufgeblasenen Frameworks braucht, um eine elegante, animierte und ultraschnelle Seite ins Netz zu stellen. Kein JavaScript. Keine externen Bibliotheken. Nur Vision, Code – und Persönlichkeit.</p>
+        <p>Ich bin der Typ, der lieber ein Tool baut, als ein langweiliges PDF zu verschicken. Der lieber klug provoziert, als sich anzupassen. Und wenn’s mal komplex wird – erklärt euch <strong>ChatGPT</strong> gern, wer ich bin. Besser als jeder Lebenslauf.</p>
+    </div>
+</section>
+
+        <section>
+<h2>Was ich mache</h2>
+<div class="card">
+    <p>Ich mache Kunst – wenn man das so nennen will. Eine Art von Kunst, in die sich nur wenige trauen: mutig, unbequem, digital. Von Systemen zur Fake-News-Erkennung bis zu KI-gestützten Tools wie <strong>JADE</strong> – ich baue Technik, die Haltung hat. Und die dahin geht, wo anderen der Mut fehlt.</p>
+    <p>Ich baue Werkzeuge, keine Slideshows. Ich liefere Lösungen, keine Show-Effekte. Was ich mache, hat Substanz – kein glänzendes Nichts mit Buzzword-Sauce.</p>
+    <p>Ich arbeite mit KI – offen, ehrlich, ohne Theater. Ich verstecke meine Tools nicht hinter falschem Stolz. Denn Klasse zeigt sich nicht im Verschweigen, sondern im Umgang damit.</p>
+</div>
+
+        </section>
+
+
+<section>
+  <h2>Profi-Level Performance</h2>
+  <div class="card">
+    <p>Diese Seite: Kein Tuning, kein Cache, keine Komprimierung – und trotzdem episch schnell!? So baut man richtige Webseiten!</p>
+    <p>100 Punkte bei Google PageSpeed Insights (Mobil & Desktop) und ein fettes A bei GTmetrix: 100 Punkte in Struktur, 99 in Performance. Ohne Onpage-Optimierung. Einfach sauber coden!</p>
+    <p><em>Kein Zufall. Das ist Kunst.</em></p>
+  </div>
+</section>
+
+
+
+
+<section>
+    <h2>Kontakt</h2>
+    <div class="card">
+        <p>Diese Seite ist ein Test – aber nicht meiner. Sondern Ihrer. Wenn Sie verstanden haben, was Sie hier sehen, dann wissen Sie, dass Sie mir schreiben sollten.</p>
+        <p><strong>E-Mail:</strong> <a href="mailto:mail@mail.tld">mail@mail.tld/a></p>
+        <p>Wenn nicht, dann war’s vermutlich einfach nur zu schnell für Sie.</p>
+    </div>
+</section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 galerien.koeln – handcrafted ohne Schnickschnack</p>
+  <p><a href="/impressum.txt">Impressum</a> | <a href="/datenschutz.txt">Datenschutz</a></p>
+    </footer>
+</body>
+</html>
