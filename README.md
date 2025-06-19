@@ -1,4 +1,5 @@
-# ⚡ Minimalist Landing Page – 100/100 Google PageSpeed Out of the Box
+# ⚡ Minimalist Landing Page 
+###### 100/100 Google PageSpeed Out of the Box
 
 This is a handcrafted, **HTML + CSS only** landing page – no JavaScript, no external libraries, no fancy build tools. Just pure, clean code that hits **100/100** on Google PageSpeed Insights (Mobile & Desktop) and **GTmetrix A-Grade** without any optimization magic.
 
